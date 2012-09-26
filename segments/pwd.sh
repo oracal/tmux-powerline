@@ -12,7 +12,7 @@ source "$segment_cwd/../lib.sh"
 
 # Truncate from the left.
 tcwd=$(get_tmux_cwd)
-trunc_symbol=".."
+trunc_symbol="..."
 dir=${tcwd##*/}
 pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
 ttcwd=${tcwd/#$HOME/\~}
