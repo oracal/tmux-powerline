@@ -18,13 +18,13 @@ mute_status_check "right"
 # Segment
 # Comment/uncomment the register function call to enable or disable a segment.
 
-# declare -A wan_ip
-# wan_ip+=(["script"]="${segments_path}/wan_ip.sh")
-# wan_ip+=(["foreground"]="colour230")
-# wan_ip+=(["background"]="colour24")
-# wan_ip+=(["separator"]="${separator_right_bold}")
-# register_segment "wan_ip"
-
+# declare -A pwd
+# pwd+=(["script"]="${segments_path}/pwd.sh")
+# pwd+=(["foreground"]="colour211")
+# pwd+=(["background"]="colour89")
+# pwd+=(["separator"]="${separator_left_bold}")
+# #register_segment "pwd"
+#
 # declare -A mail_count
 # mail_count+=(["script"]="${segments_path}/maildir_count.sh")
 # #mail_count+=(["script"]="${segments_path}/apple_mail_count.sh")
@@ -75,8 +75,8 @@ mute_status_check "right"
 # battery+=(["foreground"]="colour127")
 # battery+=(["background"]="colour137")
 # battery+=(["separator"]="${separator_left_bold}")
-# #register_segment "battery"
-#
+#register_segment "battery"
+
 # declare -A weather
 # weather+=(["script"]="${segments_path}/weather.sh")
 # weather+=(["foreground"]="colour255")
@@ -93,19 +93,19 @@ mute_status_check "right"
 # fi
 #register_segment "xkb_layout"
 
-# declare -A date_day
-# date_day+=(["script"]="${segments_path}/date_day.sh")
-# date_day+=(["foreground"]="colour231")
-# date_day+=(["background"]="colour234")
-# date_day+=(["separator"]="${separator_left_bold}")
-# register_segment "date_day"
-
 declare -A vcs_branch
 vcs_branch+=(["script"]="${segments_path}/vcs_branch.sh")
 vcs_branch+=(["foreground"]="colour231")
 vcs_branch+=(["background"]="colour24")
 vcs_branch+=(["separator"]="${separator_left_bold}")
 register_segment "vcs_branch"
+
+# declare -A date_day
+# date_day+=(["script"]="${segments_path}/date_day.sh")
+# date_day+=(["foreground"]="colour136")
+# date_day+=(["background"]="colour235")
+# date_day+=(["separator"]="${separator_left_bold}")
+# register_segment "date_day"
 
 declare -A date_full
 date_full+=(["script"]="${segments_path}/date_full.sh")

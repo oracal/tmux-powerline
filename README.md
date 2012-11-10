@@ -4,9 +4,9 @@ This is a set of scripts (segments) for making a nice and dynamic tmux statusbar
 The following segments exists for now:
 * LAN & WAN IP addresses.
 * Now Playing for MPD, Spotify (GNU/Linux native or wine, OS X), iTunes (OS X), Rhythmbox, Banshee, MOC, and Audacious.
-* New mail count for Maildir and Apple Mail.
+* New mail count for GMail, Maildir and Apple Mail.
 * GNU/Linux and Macintosh OS X battery status (uses [richo/dotfiles/bin/battery](https://github.com/richoH/dotfiles/blob/master/bin/battery)).
-* Weather in Celsius, Fahrenheit and Kelvin using Google's weather API.
+* Weather in Celsius, Fahrenheit and Kelvin using Yahoo Weather.
 * System load, cpu usage and uptime.
 * Git, SVN and Mercurial branch in CWD.
 * Date and time.
@@ -51,7 +51,7 @@ Requirements for the lib to work are:
 
 * Recent tmux version
 * `bash --version` >= 4.0
-* A patched font. Follow instructions at [Lokaltog/vim-powerline/fontpatcher](https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher) or [download](https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts) a new one.
+* A patched font. Follow instructions at [Lokaltog/vim-powerline/fontpatcher](https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher) or [download](https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts) a new one. However you can use other substitute symbols as well; see `config.sh`.
 
 ## Segment Requirements
 Requirements for some segments. You only need to fullfill the requirements for those segments you want to use.
@@ -59,6 +59,7 @@ Requirements for some segments. You only need to fullfill the requirements for t
 * WAN IP: curl, bc
 * MPD now playing: [libmpdclient](http://sourceforge.net/projects/musicpd/files/libmpdclient/)
 * xkb_layout: X11, XKB
+* GMail count: wget.
 
 ## OS X specific requirements
 
@@ -119,7 +120,7 @@ Also I recommend you to use the [tmux-colors-solarized](https://github.com/seebi
 ```bash
 source ~/path/to/tmux-colors-solarized/tmuxcolors.conf
 ```
-Some segments e.g. cwd and cvs_branch needs to find the current working directory of the active pane. To achive this we let tmux save the path each time the bash prompt is displayed. Put this in your `~/.bashrc` or where you define you PS1 variable (I use and source `~/.bash_ps1`):
+Some segments e.g. cwd and cvs_branch needs to find the current working directory of the active pane. To achive this we let tmux save the path each time the shell prompt is displayed. Put the line below in your `~/.bashrc` or where you define you PS1 variable. zsh users can put it in e.g. `~/.zshrc` and may change `PS1` to `PROMPT` (but that's not necessary).
 
 ```bash
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
@@ -160,6 +161,13 @@ Some segments might not work on your system for various reasons such as missing 
 ```bash
 $ bash -x ~/path/to/failing/segment.sh
 ```
+To see all output even if some segment fails you can set `DEBUG_MODE="true"` in `config.sh`.
+
+## Common problems
+
+### VCS_branch is not updating
+The issue is probably that the update of the current directory in the active pane is not updated correctly. Make sure that your PS1 or PROMPT variable actually contains the line from the installation step above by simply inspecing the output of `echo $PS1`. You might have placed the PS1 line in you shell confugration such that it is overwritten later. The simplest solution is to put it at the very end to make sure that nothing overwrites it. See [issue #52](https://github.com/erikw/tmux-powerline/issues/52).
+
 
 # Hacking
 
